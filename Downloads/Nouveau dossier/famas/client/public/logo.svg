@@ -1,0 +1,52 @@
+<svg width="100%" viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg">
+
+  <rect width="680" height="300" fill="#0e0e0e" style="fill:rgb(14, 14, 14);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!--
+    Analyse précise de l'image :
+    - Triangle/biseau en haut à gauche (coin supérieur gauche coupé en diagonale)
+    - Barre haute : rectangle qui part du milieu vers la droite
+    - Espace vide entre les deux barres
+    - Barre basse : rectangle plus large, décalé vers la gauche
+    - La forme globale = un F où la verticale gauche EST la diagonale elle-même
+
+    Structure :
+    Le F est composé de 3 pièces :
+    1. Barre HAUTE : un parallélogramme (bord gauche en biseau)
+    2. Barre BASSE : un parallélogramme plus large (bord gauche en biseau)
+    3. Un petit triangle/coin qui relie les deux à gauche
+  -->
+
+  <!-- 
+    Coordonnées basées sur l'image :
+    
+    La forme ressemble à :
+    - Coin haut-gauche = triangle pointu
+    - Barre haute va de ce triangle vers la droite
+    - Barre basse est plus large, commence plus à gauche
+    
+    Point clé : la diagonale va du coin bas-gauche de la barre haute
+                 jusqu'au coin haut-gauche de la barre basse
+  -->
+
+  <!-- BARRE HAUTE (parallélogramme) -->
+  <!-- haut-gauche diagonal, haut-droit droit, bas-droit droit, bas-gauche diagonal -->
+  <polygon points="&#10;    88,78&#10;    210,78&#10;    210,112&#10;    68,112&#10;  " fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- BARRE BASSE (parallélogramme plus large) -->
+  <polygon points="&#10;    58,142&#10;    210,142&#10;    210,176&#10;    38,176&#10;  " fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- COIN / TRIANGLE gauche qui relie les deux barres (la "colonne" du F) -->
+  <!-- C'est le petit triangle pointu en haut à gauche -->
+  <polygon points="&#10;    88,78&#10;    68,112&#10;    38,142&#10;    58,142&#10;    88,112&#10;    108,78&#10;  " fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Séparateur -->
+  <rect x="240" y="78" width="2" height="154" rx="1" fill="#333333" style="fill:rgb(51, 51, 51);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- FAMAS -->
+  <text x="260" y="182" font-family="'Arial Black', 'Franklin Gothic Heavy', 'Impact', sans-serif" font-size="86" font-weight="900" letter-spacing="3" fill="#ffffff" text-anchor="start" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Arial Black&quot;, &quot;Franklin Gothic Heavy&quot;, Impact, sans-serif;font-size:86px;font-weight:900;text-anchor:start;dominant-baseline:auto">FAMAS</text>
+
+  <!-- Tagline -->
+  <text x="262" y="210" font-family="'Arial', sans-serif" font-size="11" letter-spacing="4" fill="#666666" text-anchor="start" style="fill:rgb(102, 102, 102);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:11px;font-weight:400;text-anchor:start;dominant-baseline:auto">VENTE DE VÉHICULES · GABON</text>
+
+</svg>
