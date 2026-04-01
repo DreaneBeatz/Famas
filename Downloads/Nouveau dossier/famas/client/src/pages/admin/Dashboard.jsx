@@ -54,7 +54,7 @@ export default function Dashboard() {
       }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <img src="/logo.svg" alt="Famas" style={{ height: '32px' }} />
+            <img src="/logo.png" alt="Famas" style={{ height: '32px' }} />
             <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Administration</span>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem' }}>

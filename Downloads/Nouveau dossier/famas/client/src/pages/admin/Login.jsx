@@ -36,7 +36,7 @@ export default function Login() {
       <div style={{ width: '100%', maxWidth: '380px' }}>
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <img src="/logo.svg" alt="Famas" style={{ height: '50px', margin: '0 auto 1rem' }} />
+          <img src="/logo.png" alt="Famas" style={{ height: '50px', margin: '0 auto 1rem' }} />
           <h1 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Espace Administrateur</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Connectez-vous pour gérer le site</p>
         </div>

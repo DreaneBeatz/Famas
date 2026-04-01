@@ -21,7 +21,7 @@ export default function Navbar() {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar-inner">
         <Link to="/" className="navbar-logo">
-          <img src="/logo.svg" alt="Famas Auto" className="navbar-logo-img" />
+          <img src="/logo.png" alt="Famas Auto" className="navbar-logo-img" />
         </Link>
 
         <ul className={`navbar-links ${menuOpen ? 'open' : ''}`}>
