@@ -1,7 +1,7 @@
 const express = require('express');
 const Vehicle = require('../models/Vehicle');
 const auth = require('../middleware/authMiddleware');
-const { upload, cloudinary } = require('../config/cloudinary');
+const { upload, uploadToCloudinary, cloudinary } = require('../config/cloudinary');
 const router = express.Router();
 
 // GET /api/vehicles — liste avec filtres
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/vehicles/brands — liste des marques disponibles
+// GET /api/vehicles/brands
 router.get('/brands', async (req, res) => {
   try {
     const brands = await Vehicle.distinct('brand', { available: true });
@@ -47,7 +47,7 @@ router.get('/brands', async (req, res) => {
   }
 });
 
-// GET /api/vehicles/recent — 6 derniers pour la home
+// GET /api/vehicles/recent
 router.get('/recent', async (req, res) => {
   try {
     const vehicles = await Vehicle.find({ available: true }).sort({ createdAt: -1 }).limit(6);
@@ -71,9 +71,20 @@ router.get('/:id', async (req, res) => {
 // POST /api/vehicles — ajouter (admin)
 router.post('/', auth, upload.array('photos', 10), async (req, res) => {
   try {
-    const photos = req.files ? req.files.map((f) => f.path) : [];
+    const photos = [];
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        const url = await uploadToCloudinary(file.buffer);
+        photos.push(url);
+      }
+    }
     const features = req.body.features ? JSON.parse(req.body.features) : [];
-    const vehicle = new Vehicle({ ...req.body, photos, features, negotiable: req.body.negotiable === 'true' });
+    const vehicle = new Vehicle({
+      ...req.body,
+      photos,
+      features,
+      negotiable: req.body.negotiable === 'true',
+    });
     await vehicle.save();
     res.status(201).json(vehicle);
   } catch (err) {
@@ -87,7 +98,13 @@ router.put('/:id', auth, upload.array('photos', 10), async (req, res) => {
     const vehicle = await Vehicle.findById(req.params.id);
     if (!vehicle) return res.status(404).json({ message: 'Véhicule introuvable' });
 
-    const newPhotos = req.files ? req.files.map((f) => f.path) : [];
+    const newPhotos = [];
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        const url = await uploadToCloudinary(file.buffer);
+        newPhotos.push(url);
+      }
+    }
     const keepPhotos = req.body.keepPhotos ? JSON.parse(req.body.keepPhotos) : vehicle.photos;
     const features = req.body.features ? JSON.parse(req.body.features) : vehicle.features;
 
@@ -102,18 +119,18 @@ router.put('/:id', auth, upload.array('photos', 10), async (req, res) => {
   }
 });
 
-// DELETE /api/vehicles/:id — supprimer (admin)
+// DELETE /api/vehicles/:id (admin)
 router.delete('/:id', auth, async (req, res) => {
   try {
     const vehicle = await Vehicle.findByIdAndDelete(req.params.id);
     if (!vehicle) return res.status(404).json({ message: 'Véhicule introuvable' });
 
-    // Supprimer les photos Cloudinary
     for (const url of vehicle.photos) {
-      const publicId = url.split('/').slice(-2).join('/').replace(/\.[^/.]+$/, '');
-      await cloudinary.uploader.destroy(publicId).catch(() => {});
+      try {
+        const publicId = url.split('/').slice(-2).join('/').replace(/\.[^/.]+$/, '');
+        await cloudinary.uploader.destroy(publicId);
+      } catch (_) {}
     }
-
     res.json({ message: 'Véhicule supprimé' });
   } catch (err) {
     res.status(500).json({ message: 'Erreur serveur' });
