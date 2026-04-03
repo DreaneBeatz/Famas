@@ -5,6 +5,16 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// Capture toutes les erreurs non gérées
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err.message, err.stack);
+  process.exit(1);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('UNHANDLED REJECTION:', reason);
+  process.exit(1);
+});
+
 const app = express();
 
 app.use(cors({ origin: '*' }));
